@@ -1,4 +1,4 @@
-cd $HOME
+PARENTDIR=/scratch
 
 echo "##################################################################################################"
 echo "Initiating process..."
@@ -34,18 +34,18 @@ zip -r elec_mag-tensor.zip . \
 --exclude $pythonExecutable
 
 echo "Preparing for executing spark jobs...Copying files"
-cp ./elec_mag-tensor.zip $HOME/$folderName/elec_mag-tensor.zip
-cp ./pyspark_submit.sh $HOME/$folderName/pyspark_submit.sh
-cp ./$pythonExecutable $HOME/$folderName/$pythonExecutable
+cp ./elec_mag-tensor.zip $PARENTDIR/$folderName/elec_mag-tensor.zip
+cp ./pyspark_submit.sh $PARENTDIR/$folderName/pyspark_submit.sh
+cp ./$pythonExecutable $PARENTDIR/$folderName/$pythonExecutable
 
-cd $HOME/$folderName
+cd $PARENTDIR/$folderName
 
 echo "Deleteing source code files..."
 rm -rf ./Electromagnetic-Response-tensor-graphene
 
 echo "Starting spark job...at $(date '+%d/%m/%Y %H:%M:%S')"
-bash $HOME/$folderName/pyspark_submit.sh $HOME/$folderName $pythonExecutable elec_mag-tensor.zip
+bash $PARENTDIR/$folderName/pyspark_submit.sh $PARENTDIR/$folderName $pythonExecutable elec_mag-tensor.zip
 echo "Job complete ...at $(date '+%d/%m/%Y %H:%M:%S')"
 
 echo "Post Processing cleanup"
-rm -rf $HOME/$folderName
+rm -rf $PARENTDIR/$folderName
