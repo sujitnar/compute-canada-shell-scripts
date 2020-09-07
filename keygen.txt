@@ -1,1 +1,8 @@
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/elec_mag_tensor_rsa -C "your_email@example.com"
+
+
+Host CONA_HN1_Scripts.github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/hn1_auto_scripts_rsa
+  IdentitiesOnly yes

@@ -22,7 +22,7 @@ echo "Cloning repository:"
 git clone \
 --single-branch \
 --branch parallelized \
-https://github.com/sujitnar/Electromagnetic-Response-tensor-graphene.git
+sujit.github.com:sujitnar/Electromagnetic-Response-tensor-graphene.git
 
 echo "Clonning successful..!"
 cd ./Electromagnetic-Response-tensor-graphene
