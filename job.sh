@@ -1,4 +1,5 @@
-PARENTDIR=/scratch
+PARENTDIR=/scratch/devsuj
+cd $PARENTDIR
 
 echo "##################################################################################################"
 echo "Initiating process..."
@@ -34,9 +35,9 @@ zip -r elec_mag-tensor.zip . \
 --exclude $pythonExecutable
 
 echo "Preparing for executing spark jobs...Copying files"
-cp ./elec_mag-tensor.zip $PARENTDIR/$folderName/elec_mag-tensor.zip
-cp ./pyspark_submit.sh $PARENTDIR/$folderName/pyspark_submit.sh
-cp ./$pythonExecutable $PARENTDIR/$folderName/$pythonExecutable
+mv ./elec_mag-tensor.zip $PARENTDIR/$folderName
+mv ./pyspark_submit.sh $PARENTDIR/$folderName
+mv ./$pythonExecutable $PARENTDIR/$folderName
 
 cd $PARENTDIR/$folderName
 
