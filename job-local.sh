@@ -1,4 +1,4 @@
-PARENTDIR=/scratch/devsuj
+PARENTDIR=$HOME
 cd $PARENTDIR
 
 echo "##################################################################################################"
@@ -22,7 +22,7 @@ echo "Cloning repository:"
 git clone \
 --single-branch \
 --branch parallelized \
-sujit.github.com:sujitnar/Electromagnetic-Response-tensor-graphene.git
+https://github.com/sujitnar/Electromagnetic-Response-tensor-graphene.git
 
 echo "Clonning successful..!"
 cd ./Electromagnetic-Response-tensor-graphene
@@ -31,12 +31,12 @@ echo "Zipping elec_mag-tensor.zip..."
 zip -r elec_mag-tensor.zip . \
 --exclude *.md* \
 --exclude *.git* \
---exclude pyspark_submit.sh \
+--exclude pyspark-submit-local.sh \
 --exclude $pythonExecutable
 
 echo "Preparing for executing spark jobs...Copying files"
 mv ./elec_mag-tensor.zip $PARENTDIR/$folderName
-mv ./pyspark_submit.sh $PARENTDIR/$folderName
+mv ./pyspark-submit-local.sh $PARENTDIR/$folderName
 mv ./$pythonExecutable $PARENTDIR/$folderName
 
 cd $PARENTDIR/$folderName
@@ -45,12 +45,7 @@ echo "Deleteing source code files..."
 rm -rf ./Electromagnetic-Response-tensor-graphene
 
 echo "Starting spark job...at $(date '+%d/%m/%Y %H:%M:%S')"
-
-sbatch $PARENTDIR/$folderName/pyspark_submit.sh \
---export=programRootDir=$PARENTDIR/$folderName \
---export=pythonExecutable=$pythonExecutable \
---export=zipFile=elec_mag-tensor.zip
-
+bash $PARENTDIR/$folderName/pyspark-submit-local.sh $PARENTDIR/$folderName $pythonExecutable elec_mag-tensor.zip
 echo "Job complete ...at $(date '+%d/%m/%Y %H:%M:%S')"
 
 echo "Post Processing cleanup"
